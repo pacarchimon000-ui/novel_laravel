@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "chmod +x ./railway/init-app.sh && sh ./railway/init-app.sh && php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t public"
+startCommand = "php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t public"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
