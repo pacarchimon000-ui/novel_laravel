@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     
     <style>
         :root {
@@ -32,8 +33,8 @@
             --radius-lg: 20px;
             --shadow: 0 4px 24px rgba(0,0,0,0.4);
             --shadow-lg: 0 8px 48px rgba(0,0,0,0.6);
-            --font-body: 'Poppins', sans-serif;
-            --font-reading: 'Merriweather', Georgia, serif;
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    --font-reading: 'Merriweather', Georgia, serif;
             --nav-h: 68px;
             --transition: all 0.25s ease;
         }
@@ -105,10 +106,34 @@
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+            margin-bottom: 0;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        input[type="radio"] {
+            width: auto;
+            margin-right: 0.5rem;
+            margin-bottom: 0;
+            vertical-align: middle;
+            cursor: pointer;
+        }
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+        }
+        label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        label input[type="checkbox"],
+        label input[type="radio"] {
+            margin-right: 0.5rem;
         }
         
         /* SECTION */
@@ -145,7 +170,7 @@
                 @else
                     <a href="{{ route('bookmarks.index') }}" class="nav-link {{ request()->routeIs('bookmarks.*') ? 'active' : '' }}">🔖 Bookmark</a>
                 @endif
-                <a href="{{ route('coins.index') }}" class="nav-link {{ request()->routeIs('coins.*') ? 'active' : '' }}"><span class="coin-badge" aria-hidden="true">C</span> Coin ({{ auth()->user()->coins }})</a>
+                <a href="{{ route('coins.index') }}" class="nav-link {{ request()->routeIs('coins.*') ? 'active' : '' }}">⚡ EXP & Koin ({{ auth()->user()->coins }})</a>
             @endauth
         </div>
 
@@ -188,7 +213,7 @@
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('profile.edit') }}" class="dropdown-item">👤 Pengaturan Profil</a>
-                        <a href="{{ route('coins.index') }}" class="dropdown-item"><span class="coin-badge" aria-hidden="true">C</span> Coin: {{ auth()->user()->coins }}</a>
+                        <a href="{{ route('coins.index') }}" class="dropdown-item">⚡ EXP & Koin: {{ auth()->user()->coins }}</a>
                         @if(auth()->user()->isAdmin())
                             <a href="{{ route('admin.dashboard') }}" class="dropdown-item">⚙️ Dashboard Admin</a>
                         @elseif(auth()->user()->isWriter())
@@ -245,7 +270,7 @@
                 <a href="{{ route('novels.index') }}">Semua Novel</a>
                 @auth
                     <a href="{{ route('bookmarks.index') }}">Bookmark</a>
-                    <a href="{{ route('coins.index') }}">Coin</a>
+                    <a href="{{ route('coins.index') }}">EXP & Koin</a>
                 @endauth
             </div>
             <div class="footer-links">
