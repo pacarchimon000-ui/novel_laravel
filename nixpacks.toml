@@ -1,0 +1,8 @@
+[phases.setup]
+
+[phases.build]
+cmds = ["npm install", "npm run build"]
+
+[phase.config]
+NODE_VERSION = "20"
+PHP_VERSION = "8.2"
