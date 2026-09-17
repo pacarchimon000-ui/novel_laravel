@@ -3,11 +3,19 @@
 @section('title', 'Pengaturan Profil')
 
 @section('content')
-<div style="margin-bottom: 1rem;"><a href="{{ route('coins.index') }}"><span class="coin-badge" aria-hidden="true">C</span> Saldo coin: {{ auth()->user()->coins }}</a></div>
 <div class="page-header">
     <div class="container">
-        <h1 class="page-title">👤 Pengaturan Profil</h1>
-        <p class="page-subtitle">Perbarui informasi profil, bio, foto avatar, dan kata sandi Anda.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h1 class="page-title">👤 Pengaturan Profil</h1>
+                <p class="page-subtitle">Perbarui informasi profil, bio, foto avatar, dan kata sandi Anda.</p>
+            </div>
+            <div>
+                <a href="{{ route('coins.index') }}" class="btn btn-outline" style="border-color: var(--accent); color: var(--accent);">
+                    🪙 Saldo Koin: <strong>{{ auth()->user()->coins }}</strong> (EXP: {{ auth()->user()->reading_points }})
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 

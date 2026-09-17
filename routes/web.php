@@ -31,8 +31,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Coins
     Route::get('/coins', [\App\Http\Controllers\CoinController::class, 'index'])->name('coins.index');
-    Route::post('/coins/topup', [\App\Http\Controllers\CoinController::class, 'topup'])->name('coins.topup');
-    Route::get('/coins/payment/{transaction}', [\App\Http\Controllers\CoinController::class, 'payment'])->name('coins.payment');
 
     // Like
     Route::post('/novels/{novel}/like', [LikeController::class, 'toggle'])->name('like.toggle');
@@ -122,5 +120,3 @@ Route::middleware(['auth'])->get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-// ==================== MIDTRANS CALLBACK ====================
-Route::post('/midtrans/callback', [\App\Http\Controllers\CoinController::class, 'callback']);

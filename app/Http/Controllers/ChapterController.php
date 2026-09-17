@@ -66,7 +66,7 @@ class ChapterController extends Controller
 
             $reward = ReadingReward::firstOrCreate(
                 ['user_id' => $user->id, 'chapter_id' => $chapter->id],
-                ['points' => 10, 'coins' => 0]
+                ['points' => 5, 'coins' => 0]
             );
 
             if (! $reward->wasRecentlyCreated) {
@@ -78,18 +78,13 @@ class ChapterController extends Controller
             $newMilestone = intdiv($newPoints, 100);
             $coins = 0;
 
-            for ($milestone = $oldMilestone + 1; $milestone <= $newMilestone; $milestone++) {
-                $coins += $milestone % 2 === 0 ? 2 : 1;
-            }
-
-            $user->reading_points = $newPoints;
-            $user->reading_level = intdiv($newPoints, 100) + 1;
-            $user->coins += $coins;
-            $user->save();
-
-            if ($coins > 0) {
+            if ($newMilestone > $oldMilestone) {
+                $coins = ($newMilestone - $oldMilestone) * 2; // 2 coins per 100-point milestone
                 $reward->update(['coins' => $coins]);
+                $user->increment('coins', $coins);
             }
+
+            $user->update(['reading_points' => $newPoints, 'reading_level' => $newMilestone + 1]);
 
             return $reward;
         });

@@ -38,7 +38,7 @@ class ReadingRewardTest extends TestCase
         $this->actingAs($user)->post(route('chapters.complete', [$novel, $chapter]))->assertRedirect();
         $this->actingAs($user)->post(route('chapters.complete', [$novel, $chapter]))->assertRedirect();
 
-        $this->assertSame(10, $user->fresh()->reading_points);
+        $this->assertSame(5, $user->fresh()->reading_points);
         $this->assertSame(0, $user->fresh()->coins);
         $this->assertSame(1, ReadingReward::where('user_id', $user->id)->count());
     }
@@ -70,8 +70,8 @@ class ReadingRewardTest extends TestCase
         }
 
         $freshUser = $user->fresh();
-        $this->assertSame(200, $freshUser->reading_points);
-        $this->assertSame(3, $freshUser->coins);
-        $this->assertSame(3, $freshUser->reading_level);
+        $this->assertSame(100, $freshUser->reading_points);
+        $this->assertSame(2, $freshUser->coins);
+        $this->assertSame(2, $freshUser->reading_level);
     }
 }
