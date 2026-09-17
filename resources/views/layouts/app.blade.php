@@ -9,7 +9,117 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #8b5cf6;
+            --primary-dark: #5b21b6;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #0f0a1e;
+            --bg-card: #1a1030;
+            --bg-surface: #211540;
+            --bg-hover: #2d1f55;
+            --text: #e2d9f3;
+            --text-muted: #9d8ec0;
+            --text-dim: #6b5f8a;
+            --border: #2d1f55;
+            --border-light: #3d2f65;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-lg: 20px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 48px rgba(0,0,0,0.6);
+            --font-body: 'Poppins', sans-serif;
+            --font-reading: 'Merriweather', Georgia, serif;
+            --nav-h: 68px;
+            --transition: all 0.25s ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+        button { cursor: pointer; font-family: inherit; border: none; background: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        
+        /* NAVBAR */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: var(--nav-h);
+            background: rgba(15,10,30,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .nav-container { display: flex; align-items: center; gap: 2rem; height: var(--nav-h); }
+        .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-size: 1.5rem; font-weight: 800; }
+        .brand-accent { color: var(--primary-light); }
+        .nav-links { display: flex; gap: 0.25rem; margin-left: auto; }
+        .nav-link {
+            padding: 0.45rem 1rem; border-radius: var(--radius-sm);
+            color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+            transition: var(--transition);
+        }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: var(--bg-surface); }
+        
+        /* BUTTONS */
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1.25rem; border-radius: var(--radius-sm);
+            font-size: 0.9rem; font-weight: 600; transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .btn-primary {
+            background: var(--primary); color: #fff;
+        }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(124,58,237,0.4); }
+        
+        /* MAIN */
+        .main-content { margin-top: var(--nav-h); min-height: calc(100vh - var(--nav-h)); padding: 2rem 0; }
+        
+        /* PAGES */
+        .novels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .novel-card { background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: var(--transition); }
+        .novel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .novel-card-body { padding: 1rem; }
+        .novel-card-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.4; }
+        
+        /* FORMS */
+        input, select, textarea {
+            width: 100%;
+            padding: 0.65rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+        }
+        
+        /* SECTION */
+        .section { padding: 2rem 0; }
+        .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; }
+        
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .novels-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
     
     @stack('styles')
     @stack('scripts')
