@@ -1,9 +1,8 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "composer install --no-interaction --no-progress --optimize-autoloader && npm install && npm run build"
 
 [deploy]
-startCommand = "php artisan migrate --force --no-interaction && php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t public"
+startCommand = "php -d variables_order=EGPCS -S 0.0.0.0:$PORT -t public"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
